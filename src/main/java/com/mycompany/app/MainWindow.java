@@ -39,6 +39,11 @@ public class MainWindow extends JFrame {
         lowStockBtn.addActionListener(e -> showLowStock());
         toolbar.add(lowStockBtn);
 
+        // Dark Mode Button
+        JButton darkBtn = new JButton("Dark Mode");
+        darkBtn.addActionListener(e -> toggleDarkMode());
+        toolbar.add(darkBtn);
+
         toolbar.addSeparator();
         toolbar.add(new JLabel(" Search: "));
         toolbar.add(searchField);
@@ -99,9 +104,9 @@ public class MainWindow extends JFrame {
                 for (Item i : low) {
                     writer.write(i.getId() + "," + i.getName() + "," + i.getQuantity() + "," + i.getPrice() + "\n");
                 }
-                JOptionPane.showMessageDialog(dialog, "Exported to Low_Stock_Report.csv!");
+                JOptionPane.showMessageDialog(dialog, "Exported successfully to Low_Stock_Report.csv!");
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(dialog, "Export failed!");
+                JOptionPane.showMessageDialog(dialog, "Export failed: " + ex.getMessage());
             }
         });
         dialog.add(exportBtn, BorderLayout.SOUTH);
@@ -111,9 +116,37 @@ public class MainWindow extends JFrame {
         dialog.setVisible(true);
     }
 
-    // MAIN METHOD — NO LOGIN, NO DARK MODE
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(MainWindow::new);
+    private void toggleDarkMode() {
+        try {
+            if (UIManager.getLookAndFeel().getName().contains("Dark")) {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } else {
+                // Try multiple FlatLaf themes (one will work)
+                try {
+                    UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarkLaf");
+                } catch (Exception ex) {
+                    UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarculaLaf");
+                }
+            }
+            SwingUtilities.updateComponentTreeUI(this);
+            pack(); 
+        } catch (Exception ex) {
+           
+        }
     }
-}// fixed export bug
+
+    // MAIN METHOD WITH LOGIN
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            LoginDialog login = new LoginDialog(null);
+            if (login.isSuccess()) {
+                new MainWindow();
+            } else {
+                System.exit(0);
+            }
+        });
+    }
+}
+
+// fixed export bug
 // fixed export 
