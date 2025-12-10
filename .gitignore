@@ -1,0 +1,13 @@
+# Maven
+target/
+.m2/
+
+# Database & Logs
+inventory.db
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.iml
+*.class
