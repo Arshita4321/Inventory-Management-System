@@ -38,6 +38,10 @@
 # 2. Double-click or run:
 java -jar my-app-1.0-SNAPSHOT.jar
 
+or 
+
+mvn compile exec:java
+
 --- 
 
 ** Project Structure
