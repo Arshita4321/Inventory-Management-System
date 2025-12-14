@@ -45,7 +45,17 @@
   </dependencies>
 
   <build>
+    
     <plugins>
+      <!-- Exec Plugin → Run the app directly -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.4.1</version>
+        <configuration>
+            <mainClass>com.mycompany.app.MainWindow</mainClass>
+        </configuration>
+      </plugin>
       <!-- Compiler Plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
