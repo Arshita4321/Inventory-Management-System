@@ -8,8 +8,7 @@
 ![SQLite](https://img.shields.io/badge/Database-SQLite-orange)
 ![FlatLaf](https://img.shields.io/badge/UI-FlatLaf%20Dark%20Mode-purple)
 
-**Final Release: v3.0**  
-**Submitted by: [Your Full Name]**  
+**Final Release: v3.0** 
 **Course: Java + DevOps Project**
 
 ---
